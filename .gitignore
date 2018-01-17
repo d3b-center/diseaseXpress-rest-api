@@ -15,3 +15,5 @@ application.*.conf
 logs/application.log
 conf/application.conf
 .cache-tests
+.DS_Store
+target
