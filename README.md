@@ -1,6 +1,13 @@
 # d3b-disease-express-rest-api
 Rest API for disease express
 
+### Build and Deploy(after clone)
+
+ 1. ```docker build -t disease-express:latest .```
+ 2. ```docker run -p 80:80 --e MONGO_URI=<mongo_uri> --e MONGO_DATABASE=<database> --name disease-express disease-express```
+
+example ```docker run -p 8080:80 -e JAVA_OPTS="-Xms1g" --e MONGO_URI=mongodb://host.docker.internal:27017 --e MONGO_DATABASE=disease_express --name disease-express disease-express```
+
 ### Queries
 1. Give me all sample annotation & RSEM value data where symbol is GPC2
 
