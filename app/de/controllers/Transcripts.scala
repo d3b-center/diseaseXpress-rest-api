@@ -7,8 +7,8 @@ import play.api.libs.json.JsString
 import play.api.mvc.Accepting
 import de.model.output.GeneInfo
 import de.model.output.TranscriptWithGeneInfo
-import de.utils.LoggingAction
 import de.repository.GeneRepository
+import play.api.mvc.Action
 
 // ===========================================================================
 class Transcripts @javax.inject.Inject() (
@@ -17,13 +17,13 @@ class Transcripts @javax.inject.Inject() (
 
   // ---------------------------------------------------------------------------
   def getTranscriptIds() =
-    LoggingAction {
+    Action {
       Ok(Json.toJson(GeneRepository.getTranscriptIds))
     }
   
   // ---------------------------------------------------------------------------
   def getTranscriptInfo(transcript_ids: String) =
-    LoggingAction {
+    Action {
       implicit request =>
         
         val transcripts: Seq[TranscriptWithGeneInfo] =

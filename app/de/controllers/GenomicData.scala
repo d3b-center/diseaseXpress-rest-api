@@ -4,11 +4,11 @@ import de.Context
 import de.model.Error
 import de.model.input.InputFilters
 import de.utils.Enums.Projection
-import de.utils.LoggingAction
 import de.validators.{ GeneIdFilters, GeneSymbolFilters, PrimaryIdsValidator, TranscriptIdFilters }
 import play.api.Configuration
 import play.api.libs.json.{ JsValue, Json }
 import play.api.mvc.{ Controller, RequestHeader, Result }
+import play.api.mvc.Action
 
 
 // ===========================================================================
@@ -27,7 +27,7 @@ class GenomicData @javax.inject.Inject() (
       gene_ids:   String,
       projection: Option[String]) =
 
-    LoggingAction {
+    Action {
       implicit request =>          
         apply(
             primaryObject = GeneIdFilters,
@@ -41,7 +41,7 @@ class GenomicData @javax.inject.Inject() (
       study_ids:  String,
       projection: Option[String]) =
 
-    LoggingAction {
+    Action {
       implicit request =>
         apply(
               primaryObject    = GeneIdFilters,
@@ -56,7 +56,7 @@ class GenomicData @javax.inject.Inject() (
       normalizations: String,
       projection:     Option[String]) =
 
-    LoggingAction {
+    Action {
       implicit request =>        
         apply(
               primaryObject  = GeneIdFilters,
@@ -73,7 +73,7 @@ class GenomicData @javax.inject.Inject() (
       normalizations: String,
       projection:     Option[String]) =
         
-    LoggingAction {    
+    Action {    
       implicit request =>      
         apply(
               primaryObject   = GeneIdFilters,
@@ -90,7 +90,7 @@ class GenomicData @javax.inject.Inject() (
       gene_symbols: String,
       projection:   Option[String]) =
         
-    LoggingAction {
+    Action {
       implicit request =>      
         apply(
               primaryObject = GeneSymbolFilters,
@@ -105,7 +105,7 @@ class GenomicData @javax.inject.Inject() (
       study_ids:    String,
       projection:   Option[String]) =
         
-    LoggingAction {    
+    Action {    
       implicit request =>
         apply(
               primaryObject   = GeneSymbolFilters,
@@ -121,7 +121,7 @@ class GenomicData @javax.inject.Inject() (
       normalizations: String,
       projection:     Option[String]) =
         
-    LoggingAction {    
+    Action {    
       implicit request =>      
         apply(
               primaryObject  = GeneSymbolFilters,
@@ -138,7 +138,7 @@ class GenomicData @javax.inject.Inject() (
       normalizations: String,
       projection:     Option[String]) =
 
-    LoggingAction {
+    Action {
       implicit request =>
         apply(
               primaryObject   = GeneSymbolFilters,
@@ -156,7 +156,7 @@ class GenomicData @javax.inject.Inject() (
       transcript_ids: String,
       projection:     Option[String]) =
       
-    LoggingAction {    
+    Action {    
       implicit request =>      
         apply(
               primaryObject = TranscriptIdFilters,
@@ -171,7 +171,7 @@ class GenomicData @javax.inject.Inject() (
       study_ids:      String,
       projection:     Option[String]) =
         
-    LoggingAction {
+    Action {
     implicit request =>
       apply(
             primaryObject   = TranscriptIdFilters,
@@ -187,7 +187,7 @@ class GenomicData @javax.inject.Inject() (
       normalizations: String,
       projection:     Option[String]) = 
         
-    LoggingAction {
+    Action {
       implicit request =>
         apply(
               primaryObject  = TranscriptIdFilters,
@@ -204,7 +204,7 @@ class GenomicData @javax.inject.Inject() (
       normalizations: String,
       projection:     Option[String]) =
 
-    LoggingAction {
+    Action {
       implicit request =>
         apply(
               primaryObject   = TranscriptIdFilters,
@@ -222,7 +222,7 @@ class GenomicData @javax.inject.Inject() (
       normalizations: String,
       projection:     Option[String]) =
       
-    LoggingAction(bodyParser = parse.json) {
+    Action(bodyParser = parse.json) {
     
       implicit request =>
   
@@ -245,7 +245,7 @@ class GenomicData @javax.inject.Inject() (
       normalizations: String,
       projection:     Option[String]) =
         
-    LoggingAction(bodyParser = parse.json) {
+    Action(bodyParser = parse.json) {
       implicit request =>
   
         val json = request.body
@@ -264,7 +264,7 @@ class GenomicData @javax.inject.Inject() (
       normalizations: String,
       projection:     Option[String]) =
 
-    LoggingAction(bodyParser = parse.json) {
+    Action(bodyParser = parse.json) {
       implicit request =>
   
         val json = request.body
@@ -283,7 +283,7 @@ class GenomicData @javax.inject.Inject() (
       normalizations: String,
       projection:     Option[String]) =
 
-    LoggingAction(bodyParser = parse.json) {
+    Action(bodyParser = parse.json) {
       implicit request =>
   
         val json: JsValue =

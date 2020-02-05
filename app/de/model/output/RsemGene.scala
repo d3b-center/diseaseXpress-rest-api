@@ -8,7 +8,6 @@ import de.utils.NumberUtils.DoubleImplicits
 import de.utils.PlayJsonUtils.JsObjectImplicits
 import play.api.libs.json._
 import play.api.libs.json.JsValue.jsValueToJsLookup
-import com.datastax.driver.core.{Row => CassandraRow}
 
 // ===========================================================================
 case class RsemGene(
@@ -81,46 +80,6 @@ case class RsemGene(
                 fpkm.entryName,
                 projectionFiledsObj.fpkm) )
       
-  
-    // ---------------------------------------------------------------------------
-    def fromCassandra
-        (projectionFiledsObj: RsemGeneProjectons = new RsemGeneProjectons())
-        (row:                 CassandraRow) =
-      RsemGene(
-        gene_id =
-          row
-            .getString(gene_id.entryName),
-            
-        sample_id =
-          row
-            .getString(sample_id.entryName),
-             
-        length =
-          row
-            .getFloat(length.entryName)
-            .parseDoubleOption(projectionFiledsObj.length),
-            
-        effective_length =
-          row
-            .getFloat(effective_length.entryName)
-            .parseDoubleOption(projectionFiledsObj.effective_length),
-            
-        expected_count =
-          row
-            .getFloat(expected_count.entryName)
-            .parseDoubleOption(projectionFiledsObj.expected_count),
-            
-        tpm =
-          row
-            .getFloat(tpm.entryName)
-            .parseDoubleOption(projectionFiledsObj.tpm),
-            
-        fpkm =
-          row
-            .getFloat(fpkm.entryName)
-            .parseDoubleOption(projectionFiledsObj.fpkm) )    
-  
-            
     // ---------------------------------------------------------------------------
     implicit val writeJson = new Writes[RsemGene] {
       

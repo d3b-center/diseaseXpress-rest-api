@@ -6,7 +6,7 @@ lazy val root = (project in file("."))
     name                        := "disease-express-rest-api",
     version                     := "0.1.6",
     scalaVersion                := "2.11.8",
-    sbtVersion                  := "0.13.13",
+    sbtVersion                  := "0.13.15",
     resourceDirectory in Test   := baseDirectory.value / "test/resources")
     
 lazy val playVersion            = "2.5.13"
@@ -15,10 +15,8 @@ lazy val jongoVersion           = "1.3.0"
 lazy val enumeratumVersion      = "1.5.1"
 lazy val swaggerVersion         = "0.6.1"
 lazy val log4jVersion           = "1.2.17"
-lazy val elastic4sVersion       = "5.4.12"
 lazy val mongoVersion           = "3.4.2"
 lazy val fongoVersion           = "2.1.0"
-lazy val cassandraVersion       = "3.3.0"
 lazy val junitVersion           = "4.12"
 lazy val junitInterfaceVersion  = "0.11" // see https://github.com/sbt/junit-interface
 
@@ -39,11 +37,6 @@ libraryDependencies ++= Seq(
       "org.mongodb"            % "mongo-java-driver" % mongoVersion    withSources () withJavadoc (),
       "com.github.fakemongo"   % "fongo"             % fongoVersion    withSources () withJavadoc (),
     
-      //elasticsearch client
-      "com.sksamuel.elastic4s" %% "elastic4s-core" % elastic4sVersion  withSources () withJavadoc (),
-      // for the http client
-      "com.sksamuel.elastic4s" %% "elastic4s-http" % elastic4sVersion  withSources () withJavadoc (),
-      
       //enumeratum
       "com.beachape"   %% "enumeratum"           % enumeratumVersion withSources () withJavadoc (),
       "com.beachape"   %% "enumeratum-play-json" % enumeratumVersion withSources () withJavadoc (),
@@ -51,15 +44,6 @@ libraryDependencies ++= Seq(
       //jackson
       "com.fasterxml.jackson.core"   % "jackson-databind"      % jacksonVersion withSources () withJavadoc (),
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion withSources () withJavadoc (),
-      
-      //cassandra
-      "com.datastax.cassandra" % "cassandra-driver-core"     % cassandraVersion withSources () withJavadoc (),
-      "com.datastax.cassandra" % "cassandra-driver-mapping"  % cassandraVersion withSources () withJavadoc (),
-      "com.datastax.cassandra" % "cassandra-driver-extras"   % cassandraVersion withSources () withJavadoc (),
-      
-      "net.databinder.dispatch"  %% "dispatch-core"  % "0.13.1" withSources () withJavadoc (),
-      "org.apache.logging.log4j" % "log4j-api"       % "2.6.2"  withSources () withJavadoc (),
-      "org.apache.logging.log4j" % "log4j-to-slf4j"  % "2.6.2"  withSources () withJavadoc (),
       
       // tests
       "junit"        % "junit"           % junitVersion          % "test" withSources() withJavadoc(),

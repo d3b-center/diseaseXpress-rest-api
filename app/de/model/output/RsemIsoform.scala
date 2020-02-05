@@ -8,7 +8,6 @@ import de.utils.NumberUtils.DoubleImplicits
 import de.utils.PlayJsonUtils.JsObjectImplicits
 import play.api.libs.json._
 import play.api.libs.json.JsValue.jsValueToJsLookup
-import com.datastax.driver.core.{Row => CassandraRow}
 
 // ===========================================================================
 case class RsemIsoform( // TODO: separate out
@@ -91,51 +90,6 @@ case class RsemIsoform( // TODO: separate out
               isoform_percentage.entryName,
               projectionFiledsObj.isoform_percentage) )     
     
-    // ---------------------------------------------------------------------------
-    def fromCassandra
-        (projectionFiledsObj: RsemIsoformProjectons = new RsemIsoformProjectons())
-        (row:                 CassandraRow) =
-          
-      RsemIsoform(
-        transcript_id =
-          row
-            .getString(transcript_id.entryName),
-            
-        sample_id =
-          row
-            .getString(sample_id.entryName),
-            
-        length =
-          row
-            .getFloat(length.entryName)
-            .parseDoubleOption(projectionFiledsObj.length),
-            
-        effective_length =
-          row
-            .getFloat(effective_length.entryName)
-            .parseDoubleOption(projectionFiledsObj.effective_length),
-            
-        expected_count =
-          row
-            .getFloat(expected_count.entryName)
-            .parseDoubleOption(projectionFiledsObj.expected_count),
-            
-        tpm =
-          row
-            .getFloat(tpm.entryName)
-            .parseDoubleOption(projectionFiledsObj.tpm),
-            
-        fpkm =
-          row
-            .getFloat(fpkm.entryName)
-            .parseDoubleOption(projectionFiledsObj.fpkm),
-
-        isoform_percentage =
-          row
-            .getFloat(isoform_percentage.entryName)
-            .parseDoubleOption(projectionFiledsObj.isoform_percentage) )    
-  
-            
     // ---------------------------------------------------------------------------
     implicit val writeJson = new Writes[RsemIsoform] {
       

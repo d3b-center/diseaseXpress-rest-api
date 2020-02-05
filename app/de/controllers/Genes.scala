@@ -2,12 +2,12 @@ package de.controllers
 
 import de.model.output.GeneInfo
 import de.repository.GeneRepository
-import de.utils.LoggingAction
 import de.validators.{ GeneIdFilters, GeneSymbolQuery }
 import play.api.libs.json.Json
 import play.api.mvc.Controller
 import utils.Implicits.AnythingImplicits
 import de.validators.GeneSymbolFilters
+import play.api.mvc.Action
 
 // ===========================================================================
 class Genes @javax.inject.Inject() (
@@ -16,19 +16,19 @@ class Genes @javax.inject.Inject() (
   
   // ---------------------------------------------------------------------------
   def getGeneIds() =
-    LoggingAction {
+    Action {
       Ok(Json.toJson(GeneRepository.getGeneIds))
     }
 
   // ---------------------------------------------------------------------------
   def getGenesBySymbol() =
-    LoggingAction {
+    Action {
       Ok(Json.toJson(GeneRepository.getGeneSymbols))
     }
 
   // ---------------------------------------------------------------------------
   def getGeneInfoByIds(gene_ids: String) =
-    LoggingAction {
+    Action {
       implicit request =>
 
         val result = GeneIdFilters(gene_ids.split(",", -1))
@@ -46,7 +46,7 @@ class Genes @javax.inject.Inject() (
 
   // ---------------------------------------------------------------------------
   def getGeneInfoBySymbols(gene_symbols: String) =
-    LoggingAction {
+    Action {
       implicit request =>
 
         val result = GeneSymbolFilters(gene_symbols.split(",", -1))
