@@ -1,65 +1,59 @@
 package de.controllers
 
-import io.swagger.annotations.Api
-import play.api.mvc.Controller
-import io.swagger.annotations.ApiOperation
-import play.api.libs.json.Json
-import de.utils.SampleDataUtil
-import play.api.mvc.Accepting
-import play.api.mvc.RequestHeader
 import de.model.DomainTypes.StudyId
-import de.utils.LoggingAction
+import de.repository.SamplesRepository
+import de.validators.SecondaryIds
+import play.api.Configuration
+import play.api.libs.json.{ JsValue, Json }
+import play.api.mvc.{ Controller, RequestHeader, Result }
+import play.api.mvc.Action
 
-@Api(value = "/Samples",
-  description = "Operations with Samples",
-  produces = "application/json, text/tab-separated-values")
+// ===========================================================================
 class Samples @javax.inject.Inject() (
-  configuration: play.api.Configuration)
+      configuration: Configuration)
     extends Controller {
 
-  val AcceptsTsv = Accepting("text/tab-separated-values")
-
-  def getData(studies_ids: Option[StudyId])(implicit request: RequestHeader) = {
-    val _studies = studies_ids match {
-      case Some(x) => x.split(",").toSeq
-      case None    => SampleDataUtil.getStudies
+  // ---------------------------------------------------------------------------
+  def getAllSamples() =
+    Action {
+      implicit request =>
+        apply()
     }
 
-    val response = SampleDataUtil.getSamplesInfo(_studies).map { sample => sample.getAllTagsAsMap }
-    render {
-      case Accepts.Json() => Ok(Json.toJson(response))
-      case AcceptsTsv() => {
-        val header = response.flatMap { sample_tags => sample_tags.keySet }.distinct
-        val data = response.map { sample_tags =>
-          {
-            header.map { tag => sample_tags.getOrElse(tag, "") }.mkString("\t")
+  // ---------------------------------------------------------------------------
+  def getSamplesByStudy(studyIds: String) =
+    Action {
+      implicit request =>
+        apply(studyIds = studyIds.split(",", -1).toSeq)
+    }
 
+  // ===========================================================================  
+  private def apply
+        (         studyIds: Seq[StudyId]=Nil)
+        (implicit request:     RequestHeader)
+      : Result = {
+    
+        SecondaryIds(Left(studyIds)) match {
+          
+          case Left(errorObject) =>
+            BadRequest(Json.toJson(errorObject.formatJson))
+
+          case Right(studyQuery) => {
+            
+            val response: Seq[Map[String, JsValue]] =
+              SamplesRepository
+                .getSamplesInfo(studyQuery.ref_id)
+                .map(_.getAllTagsAsMap)
+                
+            render {
+              case Accepts.Json()    => Ok(Json.toJson(response))
+              case Play.AcceptsTsv() => Ok(TsvFormatter(response))
+            }
+            
           }
         }
-        Ok((Seq(header.mkString("\t")) ++ data).mkString("\n"))
-      }
-    }
-
-  }
-
-  @ApiOperation(value = "get All Samples data",
-    notes = "Returns List of Sample Data",
-    response = classOf[String],
-    responseContainer = "List",
-    httpMethod = "GET")
-  def getAllSamples() = LoggingAction {
-    implicit request =>
-      getData(None)
-  }
-
-  @ApiOperation(value = "get Samples Data",
-    notes = "Returns List of Sample Data",
-    response = classOf[String],
-    responseContainer = "List",
-    httpMethod = "GET")
-  def getSamples(studyIds: String) = LoggingAction {
-    implicit request =>
-      getData(Some(studyIds))
   }
 
 }
+
+// ===========================================================================
