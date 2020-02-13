@@ -4,4 +4,5 @@ ecs_service_type_1_standard {
     orgFullName = "d3b-center"
     agentLabel  = "docker-slave"
     org         = "d3b"
+    account     = "chopd3bPrd"
 }
