@@ -3,4 +3,5 @@ ecs_service_type_1_standard {
     projectName = "d3b-disease-express"
     orgFullName = "d3b-center"
     agentLabel  = "docker-slave"
+    org         = "d3b"
 }
