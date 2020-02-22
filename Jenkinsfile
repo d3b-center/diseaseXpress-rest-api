@@ -5,5 +5,4 @@ ecs_service_type_1_standard {
     agentLabel   = "docker-slave"
     org          = "d3b"
     account      = "chopd3bPrd"
-    environments = "service"
 }
