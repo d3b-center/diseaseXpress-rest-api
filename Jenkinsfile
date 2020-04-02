@@ -10,4 +10,5 @@ ecs_service_type_1_standard {
     deploy_scripts_version = "master"
     container_port         = "80"
     health_check_path      = "/entrypoint.sh"
+    external_config_repo   = "true"
 }
