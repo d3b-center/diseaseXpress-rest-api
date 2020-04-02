@@ -4,7 +4,7 @@ ecs_service_type_1_standard {
     orgFullName            = "d3b-center"
     org                    = "d3b"
     account                = "chopd3bPrd"
-    environments           = "service"
+    environments           = "service,qa"
     docker_image_type      = "debian"
     entrypoint_command     = "nginx"
     deploy_scripts_version = "master"
