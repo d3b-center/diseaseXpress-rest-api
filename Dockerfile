@@ -6,6 +6,7 @@ FROM openjdk:8-jre
 COPY --from=build /diseaseXpress/target/scala-2.11/disease-express-rest-api-assembly-*.jar /app.jar
 CMD java -Dhttp.port=80 ${JAVA_OPTS} -jar /app.jar
 
+RUN apt update
 RUN apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl
 RUN curl -O https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz
 RUN tar -xf Python-3.8.2.tar.xz
