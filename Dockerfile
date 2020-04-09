@@ -5,7 +5,3 @@ RUN sbt assembly
 FROM openjdk:8-jre
 COPY --from=build /diseaseXpress/target/scala-2.11/disease-express-rest-api-assembly-*.jar /app.jar
 CMD java -Dhttp.port=80 ${JAVA_OPTS} -jar /app.jar
-
-RUN apt update
-RUN apt install -y python3 python3-pip
-RUN python3 -m pip install awscli
