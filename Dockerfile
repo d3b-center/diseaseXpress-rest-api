@@ -8,4 +8,4 @@ CMD java -Dhttp.port=80 ${JAVA_OPTS} -jar /app.jar
 
 RUN apt update
 RUN apt install -y python3
-RUN pip3 install awscli
+RUN python3 -m pip install awscli
