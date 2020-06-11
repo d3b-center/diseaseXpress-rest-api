@@ -347,7 +347,10 @@ class GenomicData @javax.inject.Inject() (
          }
      } catch {
          case x: IllegalStateException => BadRequest(x.getMessage)
-         case x: Throwable             => BadRequest("Error while processing request")
+         case x: Throwable             => {
+             println(x.getStackTrace);
+             BadRequest(x.getMessage)
+         }
      } 
   }
 
