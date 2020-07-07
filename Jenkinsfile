@@ -11,5 +11,6 @@ ecs_service_type_1_standard {
     container_port         = "80"
     health_check_path      = "/entrypoint.sh"
     external_config_repo   = "true"
+    domain_external        = "d3b.io"
     friendly_dns_name      = "disease-express-api"
 }
