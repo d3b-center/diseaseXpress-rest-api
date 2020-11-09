@@ -13,4 +13,8 @@ ecs_service_type_1_standard {
     external_config_repo   = "true"
     domain_external        = "d3b.io"
     friendly_dns_name      = "disease-express-api"
+    vcpu_container         = "2048"
+    memory_container       = "4096"
+    vcpu_task              = "2048"
+    memory_task            = "4096"
 }
