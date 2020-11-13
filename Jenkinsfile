@@ -6,7 +6,7 @@ ecs_service_type_1_standard {
     account                = "chopd3bPrd"
     environments           = "prd"
     docker_image_type      = "debian"
-    entrypoint_command     = "pushstate-server -d dist -p 80"
+    entrypoint_command     = "java_standard_jar"
     deploy_scripts_version = "master"
     container_port         = "9000"
     health_check_path      = "/entrypoint.sh"
