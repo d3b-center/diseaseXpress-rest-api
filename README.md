@@ -48,3 +48,5 @@ example ```docker run -p 8080:80 -e JAVA_OPTS="-Xms1g" --e MONGO_URI=mongodb://h
 8. Give me all FPKM data for all genes where disease is NBL AND definition is Primary Solid Tumor AND mycn_status is amplified.
 
     * ```curl -X POST 'http://disease-express.dev.cavatica-dns.org/api/v1/data/normalizations/rsem?projection=summary' -H 'accept: text/tab-separated-values' -H 'Content-Type: application/json' -d '{"$and":[{"$eq":{"disease":"NBL"}},{"$eq":{"definition":"Primary Solid Tumor"}}, {"$eq":{"mycn_status":"amplified"}}]}'```
+
+**Note: Check [Notes.md](https://github.com/d3b-center/diseaseXpress/blob/master/Notes.md) for additional information about disease-express**
