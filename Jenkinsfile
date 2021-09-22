@@ -10,11 +10,11 @@ ecs_service_type_1_standard {
     deploy_scripts_version = "master"
     container_port         = "9000"
     health_check_path      = "/entrypoint.sh"
-    external_config_repo   = "true"
     domain_external        = "d3b.io"
     friendly_dns_name      = "disease-express-api"
     vcpu_container         = "2048"
     memory_container       = "4096"
     vcpu_task              = "2048"
     memory_task            = "4096"
+    internal_app           = "false"
 }
