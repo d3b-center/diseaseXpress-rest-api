@@ -29,7 +29,7 @@ object SamplesDAO {
     // oringal source: https://gist.githubusercontent.com/kalletlak/22eff309e7242704b437570ec418f070/raw/635c00a0c3f74a927beba61fe7930b3f32b2c390/clinical_info.txt
     val stream =
       Source
-        .fromURL("https://s3.amazonaws.com/d3b-openaccess-us-east-1-prd-pbta/disease-express/clinical_info.tsv")
+        .fromURL("https://s3.amazonaws.com/kf-openaccess-us-east-1-prd-pbta/disease-express/clinical_info.tsv")
 
     val results = stream
       .getLines
