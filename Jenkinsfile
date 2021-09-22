@@ -9,7 +9,7 @@ ecs_service_type_1_standard {
     entrypoint_command     = "java_standard_jar"
     deploy_scripts_version = "master"
     container_port         = "9000"
-    health_check_path      = "/entrypoint.sh"
+    health_check_path      = "/"
     domain_external        = "d3b.io"
     friendly_dns_name      = "disease-express-api"
     vcpu_container         = "2048"
