@@ -17,4 +17,5 @@ ecs_service_type_1_standard {
     vcpu_task              = "2048"
     memory_task            = "4096"
     internal_app           = "false"
+    quick_deploy           = "true"
 }
